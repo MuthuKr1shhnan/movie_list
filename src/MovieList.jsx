@@ -90,10 +90,10 @@ export default function MovieList() {
             className='border p-2 rounded'
             required
           />
-          <div className='w-full col-span-1 md:col-end-3 flex justify-between flex-col gap-2'>
+          <div className='w-full col-span-1 md:col-end-3 flex justify-between md:justify-end md:flex-row  flex-col gap-2'>
             <button
               type='submit'
-              className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full md:w-[150px]'
+              className='bg-blue-500 md:order-2 text-white px-4 py-2 rounded hover:bg-blue-600 w-full md:w-[150px]'
             >
               {editingId ? "Update Movie" : "Add Movie"}
             </button>
@@ -104,7 +104,7 @@ export default function MovieList() {
                   setEditingId(null);
                   setForm({ title: "", desc: "" });
                 }}
-                className='bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 w-full md:w-[150px]'
+                className='bg-gray-300 md:order-1 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 w-full md:w-[150px]'
               >
                 Cancel
               </button>
