@@ -7,7 +7,8 @@ export default function MovieList() {
     title: "",
     desc: "",
   });
-  //base url
+  const [editingId, setEditingId] = useState(null);
+
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const fetchMovies = async () => {
@@ -19,14 +20,19 @@ export default function MovieList() {
     }
   };
 
-  const handleCreate = async (e) => {
+  const handleCreateOrUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(baseUrl, form);
+      if (editingId) {
+        await axios.put(`${baseUrl}/${editingId}`, form);
+      } else {
+        await axios.post(baseUrl, form);
+      }
       setForm({ title: "", desc: "" });
-      fetchMovies(); // refresh
+      setEditingId(null);
+      fetchMovies();
     } catch (error) {
-      console.error("Create Error:", error.message);
+      console.error("Submit Error:", error.message);
     }
   };
 
@@ -39,24 +45,33 @@ export default function MovieList() {
     }
   };
 
+  const handleEdit = (movie) => {
+    setForm({ title: movie.title, desc: movie.desc });
+    setEditingId(movie._id);
+  };
+
   useEffect(() => {
     fetchMovies();
   }, []);
 
   return (
     <section className='px-4 md:px-30 pt-10 bg-gray-100 min-h-screen'>
-      <div className="w-full flex flex-col items-center">
+      <div className='w-full flex flex-col items-center'>
         <h1 className='text-4xl font-bold  text-center'>🍿 Movie List</h1>
-        <p className="text-center text-gray-600 mb-8">enjoy your movie by making list in Movify!</p>
+        <p className='text-center text-gray-600 mb-8'>
+          enjoy your movie by making list in Movify!
+        </p>
       </div>
 
       {/* Movie Form */}
       <div className='w-full p-4 bg-gray-50'>
         <h1 className='pl-1 text-xl text-gray-600 mb-2'>
-          Enter your Movie name & Description
+          {editingId
+            ? "Update your Movie"
+            : "Enter your Movie name & Description"}
         </h1>
         <form
-          onSubmit={handleCreate}
+          onSubmit={handleCreateOrUpdate}
           className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 bg-white p-4 rounded shadow'
         >
           <input
@@ -75,13 +90,25 @@ export default function MovieList() {
             className='border p-2 rounded'
             required
           />
-          <div className='w-full col-span-1 md:col-end-3 flex justify-end'>
+          <div className='w-full col-span-1 md:col-end-3 flex justify-between flex-col gap-2'>
             <button
               type='submit'
               className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full md:w-[150px]'
             >
-              Add Movie
+              {editingId ? "Update Movie" : "Add Movie"}
             </button>
+            {editingId && (
+              <button
+                type='button'
+                onClick={() => {
+                  setEditingId(null);
+                  setForm({ title: "", desc: "" });
+                }}
+                className='bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 w-full md:w-[150px]'
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </form>
       </div>
@@ -117,10 +144,16 @@ export default function MovieList() {
                 <td className='p-3 text-center border-r border-gray-300'>
                   {movie.desc}
                 </td>
-                <td className='p-3 text-left'>
+                <td className='p-3 text-left space-x-2'>
+                  <button
+                    onClick={() => handleEdit(movie)}
+                    className='bg-green-400 w-full mb-2 text-white px-3 py-1 rounded hover:bg-green-500'
+                  >
+                    Edit
+                  </button>
                   <button
                     onClick={() => handleDelete(movie._id)}
-                    className='bg-red-400 text-white px-3 py-1 rounded hover:bg-red-500'
+                    className='bg-red-400 w-full text-white px-3 py-1 rounded hover:bg-red-500'
                   >
                     Delete
                   </button>
