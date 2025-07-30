@@ -7,12 +7,12 @@ export default function MovieList() {
     title: "",
     desc: "",
   });
+  //base url
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const fetchMovies = async () => {
     try {
-      const response = await axios.get(
-        "https://node-practice-nd90.onrender.com/movies"
-      );
+      const response = await axios.get(baseUrl);
       setMovies(response.data);
     } catch (error) {
       console.error("Fetch Error:", error.message);
@@ -22,7 +22,7 @@ export default function MovieList() {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://node-practice-nd90.onrender.com/movies", form);
+      await axios.post(baseUrl, form);
       setForm({ title: "", desc: "" });
       fetchMovies(); // refresh
     } catch (error) {
@@ -32,9 +32,7 @@ export default function MovieList() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `https://node-practice-nd90.onrender.com/movies/${id}`
-      );
+      await axios.delete(`${baseUrl}/${id}`);
       fetchMovies();
     } catch (error) {
       console.error("Delete Error:", error.message);
