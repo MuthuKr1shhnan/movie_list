@@ -52,7 +52,7 @@ export default function MovieList() {
       {/* Movie Form */}
       <div className='w-full p-4 bg-gray-50'>
         <h1 className='pl-1 text-xl text-gray-600 mb-2'>
-          Enter your Movie & Description
+          Enter your Movie name & Description
         </h1>
         <form
           onSubmit={handleCreate}
