@@ -45,7 +45,10 @@ export default function MovieList() {
 
   return (
     <section className='px-4 md:px-30 pt-10 bg-gray-100 min-h-screen'>
-      <h1 className='text-4xl font-bold mb-8 text-center'>🍿 Movie List</h1>
+      <div className="w-full flex flex-col items-center">
+        <h1 className='text-4xl font-bold  text-center'>🍿 Movie List</h1>
+        <p className="text-center text-gray-600 mb-8">enjoy your movie by making list in Movify!</p>
+      </div>
 
       {/* Movie Form */}
       <div className='w-full p-4 bg-gray-50'>
