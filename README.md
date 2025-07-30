@@ -1,12 +1,37 @@
-# React + Vite
+# 🎬 Movie List Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## A Full-Stack CRUD Application built with Node.js (Express) and React
 
-Currently, two official plugins are available:
+This project is a responsive movie listing website that allows users to add, edit, delete, and view movies. It uses a Node.js and Express backend connected to MongoDB for data storage, and a React frontend styled with Tailwind CSS. API calls are handled using Axios.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend:
+
+- **React** – UI rendering
+- **Tailwind CSS** – Styling and layout
+- **Axios** – API requests to the backend
+
+### Backend:
+
+- **Node.js + Express** – RESTful API
+- **MongoDB** – Database for storing movie data
+- **CORS & JSON middleware** – For communication and parsing
+
+## 🔗 Backend Repository
+
+👉 [View Backend Code](https://github.com/MuthuKr1shhnan/node_practice)
+
+---
+
+## ✨ Features
+
+- Add new movies with title and description
+- Edit existing movie entries
+- Delete unwanted movies
+- Display movie list dynamically
+- Fully responsive UI
+
+---
